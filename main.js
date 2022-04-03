@@ -2,23 +2,23 @@ Status = "";
 objects = [];
 
 function setup(){
-    canvas = createCanvas(300,290);
-    canvas.position(480,250);
+    canvas = createCanvas(380,380);
+    canvas.center();
     video = createCapture(VIDEO);
-    video.size(300,290);
+    video.size(380,380);
     video.hide();
 }
 function start(){
     object_Detector = ml5.objectDetector('cocossd',modelLoaded);
     document.getElementById("status").innerHTML = "Status: Detecting Object";
-    input_text = document.getElementById("input_id").value;
+    input_text = document.getElementById("input").value;
 }
 function modelLoaded(){
     console.log("Model_Loaded");
     Status = true;
 }
 function draw(){
-    image(video,0,0,300,290);
+    image(video,0,0,380,380);
     if(Status != ""){
         object_Detector.detect(video, gotResults);
         for(i = 0;i < objects.length;i++){
@@ -40,7 +40,7 @@ function draw(){
                 synth.speak(utterThis);
             }
             else{
-                document.getElementById("object_status").innerHTML = input_text + " Not Found";
+                document.getElementById("number_of_objects").innerHTML = input_text + " Not Found";
             }
         }
     }
